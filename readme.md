@@ -66,7 +66,7 @@ In the frontend, the user will upload an xes file in a browser(client). Then the
 #### 4.1 Install locally
 Firstly create a folder, for example 'PM'. Then open your command line tool / terminal / prompt, then execute the following line:
 ```
-git clone https://gitlab.lrz.de/00000000014A5E89/data-mining.git
+git clone https://github.com/Fansadventure/Proces-Mining.git
 ```
 You might need to enter your user name and password for gitlab.lrz.de.
 Then install all packages for this web application:
@@ -94,7 +94,7 @@ ssh ge35qak@lehre.bpm.in.tum.de
 
 ##### Step 3. clone the repository just like on a local machine:
 ```
-git clone https://gitlab.lrz.de/00000000014A5E89/data-mining.git
+git clone https://github.com/Fansadventure/Proces-Mining.git
 ```
 
 ##### Step 4. enter my username and passwords for gitLab
@@ -130,9 +130,6 @@ Go to the frontend folder and run the app.py
 ```
 python3 app.py
 ```
-#### 5.3 File not found error:
-
-Solution: change 'static/upload' to 'frontend/static/upload' in the app.py
 
 ### 6. Usage of source codes
 Both Alpha and Heuristic miner take an xes file as input. Alpha miner outputs a Petri net and Heuristic miner outputs a dependency graph as well as a Causal net.
