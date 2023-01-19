@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} 
+    <title> Heuristic Miner </title>
+{% endblock title %}
+
+{% block content %}
+    <!--action: where do you want to submit your form to? placeholder = "xes file" -->
+    <div class="heuristic">
+        <form  method = 'POST' enctype = 'multipart/form-data'>
+            <p>
+                Background information can be found on the <a href="/#sec25">introduction page</a>.
+            </p>
+            <h3>Please upload an xes file:</h3>
+            <div> {{form.hidden_tag()}} </div> 
+            <div class="choose-file"> {{form.file()}} </div> 
+            <div class="thresholds">
+                <div class="threshold">
+                    {{form.threshold_df.label}} <br> {{form.threshold_df()}} 
+                </div>
+                <div class="threshold">
+                    {{form.threshold_dm.label}} <br> {{form.threshold_dm()}} 
+                </div>
+            </div>
+            <p class="note"> Note that the given thresholds are only used to exclude the arcs in the dependency graph.</p>    
+            <div> {{form.submit()}} </div>
+            <p class="result-msg">{{ msg }}</p>
+        </form>
+    
+        <div class="output-heuristic">
+            <h3>The resulting dependency graph (left) and corresponding dependency measures (right) are as follows: </h3>
+            <div class="dependencyGraph">
+                {% if image != '' %}
+                <img src={{ images[0] }}>
+                <img src={{ images[1] }}>
+                {% endif %}
+            </div>
+            <h3>The resulting causal net is as follows: </h3>
+            <div class="cnet">
+                {% if image != '' %}
+                <img src={{ images[2] }} class="petri-net">
+                <h4>Input bindings:</h4>
+                <div> {{ bindings[0] }} </div>
+                <h4>Output bindings:</h4>
+                <div> {{ bindings[1] }} </div>
+                 {% endif %}
+            </div>
+        </div>
+        </div>
+    </div>    
+{% endblock content %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %} 
+    <title> Proces Mining </title>
+{% endblock title %}
+
+{% block content %}
+<div class="intro" id="sec1">
+    <div>
+        <p id="intro_p1" data-aos="fade-up" > Introduction to Process Mining with Implementation of a Webservice</p>
+        <p id="intro_p2" data-aos="fade-up" data-aos-delay="400"> In this practical course, I implement two process mining algorithms: 
+            <b> Alpha Miner </b>  and <b>Heuristic Miner.</b>  </p>
+        <p id="intro_p3" data-aos="fade-up" data-aos-delay="600"> Main Reference: <br> [1] W.M.P. van der Aalst, Process Mining: Data Science in Action, vol. 2, Springer, 2016, doi: 10.1007/978-3-662-49851-4. </p>
+    </div>
+    <img src="../static/images/fig0.png" id="fig0" data-aos="zoom-out" data-aos-delay="300">
+</div>
+<div class="intro_body" id="sec2">
+    <div>
+        <div class="pm" id="sec21" data-aos="fade-up">
+            <h3 data-aos="fade-up"> Process Mining </h3>
+            <p data-aos="fade-up" data-aos-delay="100">can be seen as a means to <b>bridge</b> the gap between data science and process science.</p>
+            <img src="../static/images/fig1_process_mining.png" id="fig1" data-aos="fade-up" data-aos-delay="100">            
+            <p data-aos="fade-up" data-aos-delay="100">The idea of process mining is to discover, monitor and improve real processes by extracting 
+                knowledge from event logs readily available in today’s information systems.
+            </p>
+        </div>
+        <div class="type_of_pm" id="sec22" data-aos="fade-up" data-aos-delay="500">
+            <h3> Types of process mining</h3>
+            <div class="container">
+                <img src="../static/images/fig2.png" id="fig2">            
+                <div class="type_of_pm_describe">
+                    <p>A <b>discovery </b> technique takes an event log and produces a model without using any a-priori information. An example is the α-algorithm. </p> 
+                    <p><b>Conformance checking</b> can be used to check if reality, as recorded in the log, conforms to the model and vice versa. </p> 
+                    <p>The idea of <b>enhancement </b> is to extend or improve an existing process model using information about the actual process recorded in some event log. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="alpha" id="sec23">
+            <div data-aos="fade-right" data-aos-delay="300">
+                <img src="../static/images/Fig3_Alpha_Miner.png" id="fig31">
+            </div>
+            <div class="alpha-text" data-aos="fade-left" >
+                <h3>Alpha miner</h3>
+                <p>
+                    The first process discovery algorithms that could adequately deal with concurrency. It searches for 
+                    specific patterns in the event log (log-based ordering relations). It consits of 8 steps as shown on the left graph.
+                </p>
+                <p>
+                    Input: event log in xes format <br>
+                    Output: Petri net as process model
+                </p>
+
+                <h3>Limitations</h3>
+                <ul>
+                    <li>problems dealing with loops of length one or two </li>
+                    <li>does not take the frequency of traces into account</li>
+                    <li>...</li>
+                </ul>
+                <p> 
+                    Although the α-algorithm should not be considered as mining technique that can be used in practice, 
+                    it provides the basis for many other process discovery techniques.
+                </p>
+                <p> More information can be found in [1] Chapter 6.2 and in [2].</p>
+                <button class='btn' onclick="document.location='/alpha_miner'" data-aos="fade-left" data-aos-delay="100">Try Now</button>
+            </div>
+        </div>
+        <div class="petri_net_eg" id="sec24" >
+            <div class="petri_desc" data-aos="fade-right" data-aos-delay="400">
+                <h3>Petri net example</h3>
+                <p> Petri nets provide a higher-level representation of the process models and allow for a compact representation of concurrent behaviour in processes. </p>
+                <p> Petri nets are capable of describing sequential, parallel, choice, and loop execution between various activities in the processes. </p> 
+                <p> Circle: place;  Rectangle: transtion/activity </p>
+                <p> More information can be found in [1] Chapter 3.2.2.</p>
+            </div>   
+            <img src="../static/images/Fig3_petri_net.png" id="fig32" data-aos="zoom-in" data-aos-delay="500">
+        </div>      
+        <div class="hm" id="sec25" data-aos="fade-up" >  
+            <h3>Heuristic Miner</h3>
+            <p>Heuristic mining algorithms take frequencies of events and sequences into account when constructing a process model. </p>
+            <img src="../static/images/fig3-hm.png" width="800" id="fig33">
+            <p> 
+                It consists of two main phases. Firstly, the dependency graph will be generated by counting frequencies. Secondly, 
+                a causal net will be extracted from the event log. 
+            </p>
+            <p> More information can be found in [1] Chapter 7.2.</p>
+            <button class='btn' onclick="document.location='/heuristic_miner'">Try Now</button>
+        </div>  
+     </div>
+</div>
+<div id="sec3" data-aos="fade-up">
+    <div class="more_algo">
+        <h3>More algorithms</h3>
+        <a href="https://link.springer.com/chapter/10.1007/978-3-540-85758-7_26" target="_blank">Region-Based Mining</a>
+        <a href="https://link.springer.com/chapter/10.1007/978-3-642-38697-8_17" target="_blank">Inductive Mining</a>
+        <a href="https://link.springer.com/article/10.1007/s10618-006-0061-7" target="_blank">Genetic process mining</a>
+    </div>
+    <div class="ref">
+        <h3>Useful resources</h3>
+    <a href="https://www.youtube.com/playlist?list=PLG_1ZxIPXO0uA-LolJSQH2jzJ8oUiq9hu" target="_blank">Process Mining Course given by prof.dr.ir. Wil van der Aalst.</a>
+
+    <h3>References</h3>
+    <a href="https://link.springer.com/book/10.1007/978-3-662-49851-4" target="_blank">[1] W.M.P. van der Aalst, Process Mining: Data Science in Action</a> <br>
+    <a href="https://ieeexplore.ieee.org/abstract/document/1316839" target="_blank">[2] Workflow mining: discovering process models from event logs</a>
+    </div>
+</div>
+
+<script src="../static/aos/aos.js"></script>
+    
+{% endblock content%}

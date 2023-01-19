@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} 
+    <title> Alpha Miner </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="alpha">
+        <form  method = 'POST' enctype = 'multipart/form-data'>
+            <p>
+                Background information can be found on the <a href="/#sec23">introduction page</a>.
+            </p>
+            <h3>Please upload an xes file:</h3>
+            <div> {{form.hidden_tag()}} </div> 
+            <div>
+                <div class="choose-file"> {{form.file()}} </div> 
+                {{form.submit()}} 
+            </div>
+            <p class="result-msg">  {{ msg }} </p>
+        </form>
+    
+        <div class="output-alpha">
+            <h3>The resulting Petri net (left) and corresponding footprint matrix (right) are as follows: </h3>
+           <div class="petri">
+            {% if image != '' %}
+            <img src={{ image_petri }} class="petri-net1">
+            <img src={{ image_footprint }} class="petri-net2">
+            {% endif %}    
+           </div>
+        </div>  
+    </div>
+{% endblock content %}

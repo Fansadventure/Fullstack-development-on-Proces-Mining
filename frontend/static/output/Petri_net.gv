@@ -1,0 +1,36 @@
+digraph {
+	height=12 nodesep=0.8 rankdir=LR width=15
+	node [fixedsize=false ordering=in shape=rectangle width=0.8]
+	a [fontsize=22]
+	b [fontsize=22]
+	c [fontsize=22]
+	d [fontsize=22]
+	e [fontsize=22]
+	f [fontsize=22]
+	node [fixedsize=true forcelabels=true label="" ordering=out shape=circle width=0.3]
+	"p({e},{f})" [label=p0]
+	"p({b},{c,f})" [label=p1]
+	"p({a,d},{b})" [label=p2]
+	"p({c},{d})" [label=p3]
+	"p({a},{e})" [label=p4]
+	iL [xlabel=<i<sub>L</sub>>]
+	oL [xlabel=<o<sub>L</sub>>]
+	edge [arrowsize=0.6 forcelabels=true]
+	a -> "p({a,d},{b})"
+	a -> "p({a},{e})"
+	b -> "p({b},{c,f})"
+	c -> "p({c},{d})"
+	d -> "p({a,d},{b})"
+	e -> "p({e},{f})"
+	f -> oL
+	iL -> a
+	"p({a,d},{b})" -> b
+	"p({a},{e})" -> e
+	"p({b},{c,f})" -> c
+	"p({b},{c,f})" -> f
+	"p({c},{d})" -> d
+	"p({e},{f})" -> f
+	overlap=false
+	fontsize=19 label="Places: p0: p({e},{f}) p1: p({b},{c,f}) 
+p2: p({a,d},{b}) p3: p({c},{d}) p4: p({a},{e}) "
+}

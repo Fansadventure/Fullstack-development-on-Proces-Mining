@@ -1,0 +1,69 @@
+digraph {
+	height=10 nodesep=0.5 rankdir=LR width=18
+	b [label="b
+6" fontsize=22 shape=rectangle width=0.8]
+	f [label="f
+6" fontsize=22 shape=rectangle width=0.8]
+	d [label="d
+6" fontsize=22 shape=rectangle width=0.8]
+	g [label="g
+11" fontsize=22 shape=rectangle width=0.8]
+	a [label="a
+5" fontsize=22 shape=rectangle width=0.8]
+	e [label="e
+5" fontsize=22 shape=rectangle width=0.8]
+	c [label="c
+5" fontsize=22 shape=rectangle width=0.8]
+	"a-e1" [label=1 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"a-c1" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"a-e2" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"b-f1" [label=2 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"b-f2" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"b-d1" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"1d-g" [label=2 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"1c-g" [label=1 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"1f-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"2d-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"2c-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"1e-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"b-fo" [label=6 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"od-g" [label=6 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"b-do" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"of-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"a-eo" [label=5 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"oc-g" [label=5 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"a-co" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"oe-g" [label=4 fillcolor=lightblue fixedsize=True fontsize=15 shape=circle style=filled width=0.4]
+	"1c-g" -> g
+	"1d-g" -> g
+	"1e-g" -> g
+	"1f-g" -> g
+	"1f-g" -> "2d-g" [arrowhead=none color=lightblue3 penwidth=2]
+	"2c-g" -> "1c-g" [arrowhead=none]
+	"2c-g" -> "1e-g" [arrowhead=none color=lightblue3 penwidth=2]
+	"2d-g" -> "1d-g" [arrowhead=none]
+	a -> "a-c1" [arrowhead=none]
+	a -> "a-e1" [arrowhead=none]
+	"a-c1" -> "a-e2" [arrowhead=none color=lightblue3 penwidth=2]
+	"a-c1" -> "a-co" [arrowhead=none minlen=5]
+	"a-co" -> c
+	"a-e1" -> "a-e2" [arrowhead=none]
+	"a-e2" -> "a-eo" [arrowhead=none minlen=5]
+	"a-eo" -> e
+	b -> "b-d1" [arrowhead=none]
+	b -> "b-f1" [arrowhead=none]
+	"b-d1" -> "b-do" [arrowhead=none minlen=5]
+	"b-do" -> d
+	"b-f1" -> "b-f2" [arrowhead=none]
+	"b-f2" -> "b-d1" [arrowhead=none color=lightblue3 penwidth=2]
+	"b-f2" -> "b-fo" [arrowhead=none minlen=5]
+	"b-fo" -> f
+	c -> "oc-g" [arrowhead=none]
+	d -> "od-g" [arrowhead=none]
+	e -> "oe-g" [arrowhead=none]
+	f -> "of-g" [arrowhead=none]
+	"oc-g" -> "2c-g" [arrowhead=none minlen=5]
+	"od-g" -> "2d-g" [arrowhead=none minlen=5]
+	"oe-g" -> "1e-g" [arrowhead=none minlen=5]
+	"of-g" -> "1f-g" [arrowhead=none minlen=5]
+}

@@ -1,0 +1,23 @@
+digraph {
+	height=10 nodesep=0.5 rankdir=LR width=18
+	node [fixedsize=false fontsize=18 ordering=in shape=rectangle width=0.7]
+	a
+	b
+	c
+	d
+	e
+	f
+	g
+	height=10 nodesep=0.5 rankdir=LR width=18
+	edge [arrowsize=0.6 fontsize=12 forcelabels=true]
+	a -> c [label="2(0.67)"]
+	a -> e [label="3(0.75)"]
+	b -> d [label="2(0.67)"]
+	b -> f [label="4(0.8)"]
+	c -> g [label="3(0.75)"]
+	d -> g [label="4(0.8)"]
+	e -> c [label="3(0.17)"]
+	e -> g [label="2(0.67)"]
+	f -> d [label="4(0.29)"]
+	f -> g [label="2(0.67)"]
+}

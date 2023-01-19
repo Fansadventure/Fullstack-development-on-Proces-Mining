@@ -1,0 +1,8 @@
+__pyche__/
+*.pyc
+output/*.gv
+output/*.gv.png
+output/dm_matrix.png
+output/footprint_matrix.png
+upload/*.xes
+.DS_Store

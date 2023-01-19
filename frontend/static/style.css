@@ -1,0 +1,884 @@
+.light-theme {
+  --background-color: #ebebed;
+  --clr-foreground: hsl(221, 53%, 55%);
+  --clr-background: hsl(0 0% 100%);
+  --button-color: #c8c8c8;
+  --header-color: #9fb9e9;
+  --header-bg: white;
+  --background-img: url(images/bg-light1.jpg) top center no-repeat;
+  --background-img2: url(images/bg-light2.jpg) center center no-repeat;
+  --box-shadow: 0 0 4px 4px rgba(38, 38, 38, 0.1);
+}
+
+.dark-theme {
+  --text-color: #ffffff;
+  --background-color: #333333; 
+  --button-color: #6a6969;
+  --header-color: #586488;
+  --header-bg: rgb(58, 58, 58);
+  --background-img: url(images/bg-dark1.jpg) top center no-repeat;
+  --background-img2: url(images/bg-dark2.jpg) bottom center no-repeat;
+  --clr-background: hsl(225, 9%, 18%);
+  --clr-foreground: hsl(48, 100%, 50%);
+  --box-shadow: 0 0 4px 4px rgba(125, 125, 125, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin:0;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  min-height: 120vh;
+  position: relative;
+}
+
+header {
+  width: 100%;
+  height: 4rem;
+  background-color: var(--header-bg);
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+}
+header .logo {
+  display: flex;
+  margin-left: 4rem;
+  align-items: center;
+  text-decoration: none;
+}
+header .logo>p{
+  color: #4464c4;
+  font-size:24px;
+}
+header .logo img {
+  width: 3.5rem;
+  height: 3rem;
+}
+header .toggle-button {
+  position: absolute;
+  top: 1.3rem;
+  right: 8rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+}
+header .toggle-button .bar {
+  width: 100%;
+  height: 3px;
+  background: var(--clr-foreground);
+  border-radius: 10px;
+}
+header .nav {
+  display: flex;
+}
+header .nav ul {
+  display:flex;
+}
+header .nav ul li {
+  margin-right: 2rem;
+  display: inline-block;
+  list-style: none;
+  position: relative;
+} 
+header .nav ul li a {
+  padding: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+header .nav a[aria-current='active-page']{
+  padding: 8px;
+  border-radius: 15px;
+  color:var(--text-color);
+  background:var(--header-color);
+  transition: 1s;
+}
+header .nav a[aria-current='active-page']:hover{
+  color:var(--clr-foreground);
+}
+header .nav>ul>li>a[aria-current='active-page']:before {
+  visibility: hidden;
+}
+header .nav ul a:hover {
+  color:var(--clr-foreground);
+} 
+header .nav>ul>li>a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -6px;
+  left: 0;
+  background-color:var(--clr-foreground);
+  visibility: hidden;
+  width: 0px;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+header .nav a:hover:before,
+header .nav li:hover>a:before,
+header .nav .active:before {
+  visibility: visible;
+  width: 100%;
+}
+
+header #theme-toggle {
+  margin-right: 3rem;
+}
+
+@media (max-width: 900px){
+  header .toggle-button {
+    display: flex;
+    cursor: pointer;
+  }
+  header .nav {
+    display: none;
+    height: 13rem;
+    position: absolute;
+    top:60px;
+    width:100vw;
+    background: var(--background-img2);
+    background-size: cover;
+  }
+  header .nav ul {
+    flex-direction: column;
+  }
+  header .nav ul li{
+    text-align: center;
+    margin: 10px;
+  }
+  header .nav.active {
+    display: block;
+  }
+  header .nav>ul>li>a:before {
+    display: none;
+  }
+  header #theme-toggle {
+    margin-right: 2.5rem;
+  }
+}
+
+/* 
+* Theme switch button, idea is from Kevin Powell
+*/
+
+#theme-toggle {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  opacity: 0.8;
+  padding: 8px;
+  border-radius: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+#theme-toggle svg {
+  fill: var(--clr-foreground);
+}
+
+#theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: hsl(0 0% 50% / 0.2);
+  border-radius: inherit;
+  transform: scale(0);
+  opacity: 0;
+  z-index: -1;
+}
+
+.light-theme #theme-toggle::before {
+  animation: pulseToLight 650ms ease-out;
+}
+
+.dark-theme #theme-toggle::before {
+  animation: pulseToDark 650ms ease-out;
+}
+
+#theme-toggle::after {
+  content: attr(aria-label);
+  position: absolute;
+  color: var(--clr-background);
+  background: var(--clr-foreground);
+  width: max-content;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+  top: 110%;
+  margin: 0 auto;
+  padding: 0.5em 0.5em;
+  border-radius: 1em;
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: top;
+  transition: transform 0ms linear 100ms, opacity 100ms linear;
+}
+
+#theme-toggle:hover,
+#theme-toggle:focus {
+  outline: 0;
+  opacity: 1;
+  background: hsl(0 0% 50% / 0.15);
+}
+
+#theme-toggle:hover::after,
+#theme-toggle:focus-visible::after {
+  opacity: 0.7;
+  transform: scale(1);
+  transition: transform 70ms linear, opacity 70ms linear;
+}
+
+.toggle-circle {
+  transition: transform 500ms ease-out;
+}
+
+.light-theme .toggle-circle {
+  transform: translateX(-15%);
+}
+
+.toggle-sun {
+  transform-origin: center center;
+  transition: transform 750ms cubic-bezier(0.11, 0.14, 0.29, 1.32);
+}
+
+.light-theme .toggle-sun {
+  transform: rotate(0.5turn);
+}
+
+@keyframes pulseToLight {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseToDark {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+
+.main-content {
+  color: var(--text-color);
+  font-family: "Nunito", sans-serif;
+}
+
+
+/* ========== introduction page ========= */
+
+/* 
+ * intro section 1 
+ */
+ .main-content #sec1 {
+  margin: 0;
+  padding: 5rem;
+  line-height: clamp(2rem,4vh,3rem);
+  min-height: 60vh;
+  column-gap: 5rem;
+  display: flex; 
+  background: var(--background-img);
+  background-size: cover;
+  backdrop-filter: blur(3rem);
+}
+.main-content #sec1 #intro_p1 {
+  margin-top: 2rem;
+  font-size: clamp(24px, 2vw, 28px); 
+  font-weight: 700;
+}
+.main-content #sec1 #intro_p2 {
+  font-size: clamp(15px, 2vw, 20px); 
+}
+.main-content #sec1 #intro_p3 {
+  font-size: clamp(15px, 2vw, 20px); 
+  font-style: italic;
+}
+.main-content #sec1 #fig0 {
+  width: 40vw;
+  height:fit-content;
+  max-width: 500px;
+}
+
+@media (max-width: 950px) {
+  .main-content #sec1 {
+    padding-top: 2rem;
+    text-align: center;
+    flex-direction: column;
+  }
+  .main-content #sec1 #intro_p1 {
+    font-size: clamp(16px, 2.5vw, 24px)
+  }
+  .main-content #sec1 #intro_p2 {
+    font-size: clamp(14px, 2.5vw, 18px)
+  }
+  .main-content #sec1 #intro_p3 {
+    font-size: clamp(14px, 2.5vw, 16px)
+  }
+  .main-content #sec1 #fig0 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    width:fit-content;
+  }
+}
+
+/* 
+ * intro section 2 
+ */
+.main-content .intro_body  {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.main-content #sec2 h3 {
+  font-size: clamp(2vw, 25px, 3vw);
+}
+.main-content #sec2 p {
+  font-size: clamp(1.5vw, 18px, 2.5vw)
+}
+
+/* 
+ * intro sub section 2.1  what's process mining 
+ */
+.main-content .intro_body #sec21 {
+  text-align:center;
+  margin-top: 20px;
+  line-height: 2rem;
+  padding: 3rem;
+  border-radius: 2rem;
+  background: linear-gradient(to bottom, rgba(189, 201, 212, 0.3), rgba(154, 207, 181, 0.2));
+}
+.main-content .intro_body #sec21 #fig1 {
+  width: clamp(600px, 90%, 850px);
+}
+
+@media (max-width: 900px) {
+  .main-content .intro_body #sec21 #fig1 {
+    width: fit-content;
+    max-width: 100%;
+  }
+}
+
+/* 
+ * Intro sub section 2.2  types of process mining 
+ */
+.main-content .intro_body #sec22 {
+  margin-top: 20px;
+  padding: 2rem;
+  background: white;
+  min-height: 50vh;
+  border-radius: 2rem;
+  background: linear-gradient(to bottom, rgba(154, 207, 181, 0.2), rgba(189, 201, 212, 0.3));
+}
+.main-content .intro_body #sec22 .container {
+  display: flex;
+  column-gap: 2rem;
+  margin-top: 2rem;
+} 
+.main-content .intro_body #fig2 {
+  width: 40%;
+  max-width: 500px;
+}
+@media (max-width: 950px) {
+  .main-content .intro_body #sec22 {
+    text-align: center;
+  }
+  .main-content .intro_body #sec22 .container {
+    flex-direction: column;
+  }
+  .main-content .intro_body #sec22 .container .type_of_pm_describe {
+    text-align: center;
+  }
+  .main-content .intro_body #sec22 #fig2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: 75%;
+  } 
+}
+@media (max-width: 750px) {
+  .main-content .intro_body #sec22 #fig2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: 90%;
+  } 
+}
+
+/* 
+ * Intro sub section 2.3 alpha miner 
+ */
+.main-content .intro_body #sec23 {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 0;
+  line-height: 1.8rem;
+  border-radius: 2rem;
+  background: linear-gradient(to right, rgba(189, 201, 212, 0.3), rgba(154, 207, 181, 0.2));
+}
+.main-content .intro_body #sec23 .alpha-text {
+  padding: 20px;
+}
+.main-content .intro_body #sec23 .alpha-text ul li {
+  font-size: clamp(1.5vw, 18px, 2.5vw);
+}
+.main-content .intro_body #sec23 .alpha-text ul li::marker {
+  font-size: 1rem;
+  content: "✧  ";
+}
+.main-content .intro_body #sec23 #fig32 {
+  margin-right: 20px;
+  margin: 15px;
+  outline-offset: 5px;
+}
+.main-content .intro_body #sec23 .petri_desc {
+  font-size: 18px;
+  text-align:justify;
+}
+.main-content .intro_body #sec23 .btn {
+  border: 1px solid var(--text-color); 
+  letter-spacing: 2px;
+  margin-top: 0;
+  line-height: 0;
+  font-size: clamp(15px, 1.5vw, 20px);
+  letter-spacing: 1px;
+  padding: clamp(10px, 2vw ,20px);
+  border-radius: 8px;
+  color: var(--text-color);
+  background: rgba(118, 173, 251, 0.8);
+  cursor: pointer
+}
+.main-content .intro_body #sec23 .btn:hover {
+  color: rgb(199, 243, 177);
+  background: rgba(93, 146, 192, 0.6);
+  transition: 0.5s;
+  transform: translateX(4px);
+}
+.main-content .intro_body #fig31 {
+  margin-right: 2rem;
+  margin-left: 0;
+  margin-top: 1.5rem;
+  width: clamp(25vw, 25vw, 30vw);
+}
+@media (max-width: 700px) {
+  .main-content .intro_body #sec23 {
+    flex-direction: column;
+    line-height: 1.5rem;
+  }
+  .main-content .intro_body #fig31 {
+    width: 45%;
+    margin-top: -5rem;
+    margin-bottom: 1rem;
+    margin-left: 25%;
+    transform: rotate(90deg);
+  }
+  .main-content .intro_body #sec23 .alpha-text{
+    margin-top: -8rem;
+    padding: 20px;
+  }
+}
+
+/* 
+ * Intro sub section 2.4 Petri net example
+ */
+.main-content .intro_body #sec24 {
+  display: flex;
+  background: rgba(151, 183, 167, 0.2);
+  margin-top: 20px;
+  padding: 2rem;
+  border-radius: 20px;
+}
+.main-content .intro_body .petri_desc {
+  padding: 4rem;
+  line-height: 2rem;
+  text-align:justify;
+}
+.main-content .intro_body #fig32 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  width: clamp(120px,10vw,10vw);
+}
+@media (max-width: 950px) {
+  .main-content .intro_body #sec24 {
+    padding: 1rem;
+  }
+  .main-content .intro_body .petri_desc {
+    margin-top: 20px;
+    padding: 1rem;
+    line-height: 1.5rem;
+  }
+  .main-content .intro_body #fig32 {
+    width: clamp(10vw,12vw, 200px);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* 
+ * Intro sub section 2.5 Heuristic Miner 
+ */
+.main-content .intro_body #sec25 {
+  margin-top: 20px;
+  padding: 2rem;
+  background: white;
+  border-radius: 2rem;
+  background: linear-gradient(to top, rgba(189, 201, 212, 0.3), rgba(154, 207, 181, 0.2));
+
+}
+.main-content .intro_body #sec25 #fig33 {
+  min-width: 60vw;
+  max-width: 80vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-content .intro_body #sec25 .btn {
+  border: 1px solid var(--text-color); 
+  letter-spacing: 2px;
+  margin-top: 0;
+  line-height: 0;
+  font-size: clamp(15px, 1.5vw, 20px);
+  letter-spacing: 1px;
+  padding: clamp(10px, 2vw ,20px);
+  border-radius: 8px;
+  color: var(--text-color);
+  background: rgba(140, 206, 89, 0.6);
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right:auto
+}
+.main-content .intro_body #sec25 .btn:hover {
+  color: rgb(181, 255, 141);
+  background: rgba(101, 155, 203, 0.6);
+  transition: 0.5s;
+  transform: translateY(3px);
+}
+
+
+/* 
+ * Intro section 3 more algorithms 
+ */
+.main-content #sec3 {
+  display: flex;
+  margin-top: 5rem;
+  margin-bottom: 20px;
+  padding: 2rem;
+  background: url(images/bg-light3.png) center center no-repeat;
+  background-size:cover;
+}
+.main-content  #sec3 .more_algo {
+  display: grid;
+  margin-right: 4rem;
+}
+.main-content #sec3 .ref {
+  display: grid;
+}
+.main-content #sec3 a {
+  color:var(--text-color);
+  font-size: clamp(13px, 1.5vw, 18px);
+  text-decoration: none;
+}
+.main-content  #sec3 a:hover {
+  color: rgb(25, 91, 215);
+}
+@media (max-width: 700px) {
+  .main-content #sec3 .more_algo {
+    margin-right: 1.5rem;
+  }
+}
+
+/* 
+ * Upload form for Alpha Miner and Heuristic Miner
+ */
+
+.main-content form {
+  margin-top: 30px;
+  text-align: left;
+}
+.main-content form p a {
+  color:rgb(33, 90, 198);
+  text-underline-offset: 5px;
+}
+.main-content form p {
+  font-size: 18px;
+}
+.main-content form input {
+  box-sizing:border-box;
+  /* background: var(--header-bg); */
+  background: var(--text-color);
+}
+
+.main-content form .choose-file {
+  width: 15rem;
+  margin-bottom: 1rem;
+  color:rgb(111, 111, 111);
+  background: var(--text-color);
+  border: 1px solid darkgrey;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 32px;
+  box-shadow: var(--box-shadow);
+}
+.main-content form input::file-selector-button {
+  width: 95px;
+  font-size: 15px;
+  padding: 0.5em;
+  margin-top: -1px;
+  margin-left: -1px;
+  border: 1px solid darkgrey;
+  border-radius: 8px;
+  color: var(--text-color);
+  background-color: var(--button-color);
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.main-content form input::file-selector-button:hover,
+.main-content form input[type='submit']:hover {
+  background-color: rgb(75, 126, 202);
+  color:azure;
+}
+.main-content form input[type='submit'] {
+  width: 95px;
+  font-size: 15px;
+  border: 1px solid rgb(154, 151, 151);
+  color: var(--text-color);
+  background-color: rgba(140, 206, 89, 0.6);
+  padding: 0.5em;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+.main-content form input[type=number]  {
+  width: 15rem;
+  margin-top: 5px;
+  margin-right: 5rem;
+  padding: 8px;
+  border: 1px solid darkgrey;
+  border-radius:10px;
+  box-shadow:var(--box-shadow);
+}
+.main-content form .thresholds {
+  display: flex;
+}
+
+.main-content form .result-msg {
+  color: #02ba5b;
+  font-size: 18px;
+}
+
+
+/* ========== Alpha Miner page ========= */
+
+.main-content .alpha {
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+.main-content .output-alpha {
+  min-height: 800px;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  color: var(--text-color);
+  background-color:var(--header-bg);
+}
+.main-content .output-alpha .petri {
+  display: flex;
+}
+.main-content .output-alpha .petri-net1 {
+  width: 50%;  
+  max-width: 600px; 
+  height:fit-content;
+  margin: 15px;
+  outline: 2px solid var(--button-color);
+  outline-offset: 5px;
+}
+.main-content .output-alpha .petri-net2 {
+  max-width: 45%;   
+  height:fit-content;
+  margin: 15px;
+  outline: 2px solid var(--button-color);
+  outline-offset: 5px;
+}
+@media (max-width:1000px) {
+  .main-content .output-alpha .petri {
+    flex-direction: column;
+  }
+  .main-content .output-alpha .petri-net1 {
+    width: 95%;
+    max-width: 600px;
+  }
+  .main-content .output-alpha .petri-net2 {
+    width: fit-content;
+    max-width: 95%;
+  }
+}
+
+
+/* ========== Heuristics Miner page ========= */
+
+.main-content .heuristic {
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+.main-content .heuristic form .note {
+  color:red;
+  font-size: 16px;
+}
+.main-content .heuristic .output-heuristic {
+  min-height: 900px;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  color: var(--text-color);
+  background-color:var(--header-bg);
+}
+.main-content .heuristic .output-heuristic .dependencyGraph img {
+  max-width: 50%;
+  width: fit-content;
+  max-height: 500px;
+  align-items: center;
+  margin: 15px;
+  outline: 2px solid var(--button-color);
+  outline-offset: 5px;
+}
+.main-content .heuristic .output-heuristic .cnet img {
+  max-width: 80%;
+  width: fit-content;
+  max-height: 500px;
+  margin: 15px;
+  outline: 2px solid var(--button-color);
+  outline-offset: 5px;
+}
+
+@media (max-width: 800px) {
+  .main-content form .thresholds {
+    flex-direction: column;
+  }
+  .main-content form .thresholds .threshold {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+  .main-content .heuristic .output-heuristic .dependencyGraph img,
+  .main-content .heuristic .output-heuristic .cnet img  {
+    max-width: 95%;
+    width: fit-content;
+  }
+}
+
+
+/*
+ * Footer at the bottom of very page
+*/
+footer {
+  margin-top: 3rem;
+  margin-bottom: 0;
+  bottom: 0;
+  font-size: 15px;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  letter-spacing: 1px;
+  color: var(--text-color);
+  text-align: center;
+  background-color: var(--header-bg);
+  }
+  footer .credit {
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+  }
+  footer a {
+    text-decoration: none;
+    color: var(--clr-foreground);
+    border-bottom: 1px solid;
+  }
+  footer a:hover {
+    border-bottom: 2px transparent;
+  }
+
+/* 
+  back-to-top button
+  */
+.top-btn {
+  position: sticky;
+  bottom:8px;
+  right:5px;
+}
+.back-to-top {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-left: auto;
+  margin-top: auto;
+  margin-right: 8px; 
+  padding: 18px;
+  width: 15px;
+  height: 15px;
+  color:var(--background-color);
+  font-size: 25px;
+  background: var(--clr-foreground);
+  border-radius: 50%;
+  backdrop-filter: blur(1rem);
+}
+ .back-to-top:hover {
+  background: #02ba5b;
+}
+.back-to-top.active { 
+  display: flex;
+}
+
+
+
+
+  
+  
